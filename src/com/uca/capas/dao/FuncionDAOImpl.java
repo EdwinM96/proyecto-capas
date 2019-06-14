@@ -6,8 +6,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import org.springframework.stereotype.Repository;
+
 import com.uca.capas.domain.Funcion;
 
+@Repository
 public class FuncionDAOImpl implements FuncionDAO{
 	@PersistenceContext(unitName = "persistencia")
 	private EntityManager entityManager;

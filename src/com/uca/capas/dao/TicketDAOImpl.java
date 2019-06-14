@@ -6,8 +6,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import org.springframework.stereotype.Repository;
+
 import com.uca.capas.domain.Ticket;
 
+@Repository
 public class TicketDAOImpl implements TicketDAO {
 	
 	@PersistenceContext(unitName="persistencia")

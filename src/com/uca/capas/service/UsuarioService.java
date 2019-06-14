@@ -19,10 +19,11 @@ public class UsuarioService {
 	}
 	
 	public String login(String username, String password) {
+		username = username.toLowerCase();
 		List<Usuario> usrList = usuarioDao.findAll();
 		String login ="Invalido";
 		for(Usuario user:usrList) {
-			String usernameUser = user.getUsername();
+			String usernameUser = user.getUsername().toLowerCase();
 			String passwordUser = user.getPassword();
 			if(usernameUser.equals(username) && passwordUser.equals(password)) {
 				login = "Valido";

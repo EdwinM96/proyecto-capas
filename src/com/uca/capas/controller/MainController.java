@@ -1,5 +1,11 @@
 package com.uca.capas.controller;
 
+import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,34 +29,40 @@ public class MainController {
 	@Autowired
 	public AdministradorService adminService;
 	
+	Boolean loginFlag = true;
+	Usuario usuario;
+	
 	@RequestMapping("/")
 	public ModelAndView main() {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("main");
-		Usuario usuario = new Usuario();
+		usuario = new Usuario();
 		mv.addObject("usuario", usuario);
+		if(!loginFlag) {loginFlag = true; mv.addObject("fallido", loginFlag); }
 		return mv;
 	}
+	
 	@RequestMapping(value="/login", method = RequestMethod.POST)
-	public ModelAndView login(@Valid @ModelAttribute("usuario") Usuario usuario, BindingResult r) {
+	public ModelAndView login(@Valid @ModelAttribute("usuario") Usuario usuario, BindingResult r) throws ServletException, IOException {
 		ModelAndView mv = new ModelAndView();
 		//Debe ir aquí Lógica de Login de Usuario y admin
 		if(!r.hasErrors()) {
 		String login = usuarioService.login(usuario.getUsername(), usuario.getPassword());
 		String loginAdmin = adminService.loginAdmin(usuario.getUsername(), usuario.getPassword());
 		if(login.equals("Valido")) {
-
 			mv.addObject("usuario",usuario.getUsername());
 			mv.setViewName("usuarioViews/dashboard");
 		}
 		else if (loginAdmin.equals("Valido")) {
 			mv.addObject("usuario",usuario.getUsername());
 			mv.setViewName("adminViews/dashboard");
-		}}
-		else {
-			mv.addObject("estado","login invalido");
-			mv.setViewName("main");
 		}
+		else {
+			mv.addObject("fallido",true);
+			usuario = new Usuario();
+			mv.addObject("usuario", usuario);
+			mv.setViewName("main");
+		}}
 
 		return mv;
 	}

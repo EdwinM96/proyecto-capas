@@ -20,9 +20,12 @@ public class AdministradorService {
 	}
 	
 	public String loginAdmin(String username, String password) {
+		username = username.toLowerCase();
 		List<Administrador> adminList = listAll();
 		for (Administrador admin:adminList) {
-			if(admin.getPassword() == password || admin.getUsername() == username) {
+			String usernameAdmin = admin.getUsername().toLowerCase();
+			String passwordAdmin = admin.getPassword();
+			if(usernameAdmin.equals(username) && passwordAdmin.equals(password)) {
 				return "Valido";
 			}
 		}
