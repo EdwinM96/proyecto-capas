@@ -1,7 +1,5 @@
 package com.uca.capas.controller;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.uca.capas.domain.Usuario;
+import com.uca.capas.service.AdministradorService;
 import com.uca.capas.service.UsuarioService;
 
 @Controller
@@ -21,6 +20,8 @@ public class MainController {
 	@Autowired
 	public UsuarioService usuarioService;
 	
+	@Autowired
+	public AdministradorService adminService;
 	
 	@RequestMapping("/")
 	public ModelAndView main() {
@@ -36,16 +37,18 @@ public class MainController {
 		//Debe ir aquí Lógica de Login de Usuario y admin
 		if(!r.hasErrors()) {
 		String login = usuarioService.login(usuario.getUsername(), usuario.getPassword());
+		String loginAdmin = adminService.loginAdmin(usuario.getUsername(), usuario.getPassword());
 		if(login.equals("Valido")) {
 
 			mv.addObject("usuario",usuario.getUsername());
-			mv.setViewName("dashboard");
+			mv.setViewName("usuarioViews/dashboard");
 		}
-		else {
-			mv.setViewName("main");
-			mv.addObject("res", "credenciales incorrectas");
+		else if (loginAdmin.equals("Valido")) {
+			mv.addObject("usuario",usuario.getUsername());
+			mv.setViewName("adminViews/dashboard");
 		}}
 		else {
+			mv.addObject("estado","login invalido");
 			mv.setViewName("main");
 		}
 

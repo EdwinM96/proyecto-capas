@@ -13,7 +13,7 @@ public class UserDTODao {
     EntityManager em = emf.createEntityManager();
     List<UserDTO> listaUsuarios=em.createQuery("select com.uca.capas.dto.UserDTO(username,password) from administrador", UserDTO.class).getResultList();
     List<UserDTO> listaAdmins=em.createQuery("select com.uca.capas.dto.UserDTO(username,password) from usuario", UserDTO.class).getResultList();
-    List<UserDTO> lista = new ArrayList();
+    List<UserDTO> lista = new ArrayList<UserDTO>();
     lista.addAll(listaUsuarios);
     lista.addAll(listaAdmins);
     return lista;

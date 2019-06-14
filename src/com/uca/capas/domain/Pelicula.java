@@ -1,6 +1,5 @@
 package com.uca.capas.domain;
 
-import java.sql.Date;
 import java.util.Calendar;
 
 import javax.persistence.Column;

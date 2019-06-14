@@ -5,49 +5,14 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <meta charset="ISO-8859-1">
 <title>Inicio</title>
 </head>
 <body>
 <script type="text/javascript">
-            $(function () {
-                /*  Submit form using Ajax */
-                $('button[type=submit]').click(function (e) {
-
-                    //Prevent default submission of form
-                    e.preventDefault();
-
-                    //Remove all errors
-                    $('input').next().remove();
-
-                    $.post({
-                        url: 'saveEmployee',
-                        data: $('form[name=loginForm]').serialize(),
-                        success: function (res) {
-
-                            if (res.validated) {
-                                //Set response
-
-
-                            } else {
-                                Swal.fire({
-                                    type: 'error',
-                                    title: 'Credenciales incorrectas',
-                                    text: 'Usuario o contraseña incorrecto'
-                                })
-                                };
-                            }
-                       error: function(){
-                           Swal.fire({
-                                    type: 'error',
-                                    title: 'Ha sucedido un error',
-                                    text: 'Contactese con su administrador'
-                                })
-                        }
-                    })
-                });
-            });
-        </script>
+           
+</script>
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col col-lg-6">
