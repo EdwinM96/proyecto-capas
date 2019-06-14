@@ -29,7 +29,6 @@ public class MainController {
 	@Autowired
 	public AdministradorService adminService;
 	
-	Boolean loginFlag = true;
 	Usuario usuario;
 	
 	@RequestMapping("/")
@@ -38,7 +37,6 @@ public class MainController {
 		mv.setViewName("main");
 		usuario = new Usuario();
 		mv.addObject("usuario", usuario);
-		if(!loginFlag) {loginFlag = true; mv.addObject("fallido", loginFlag); }
 		return mv;
 	}
 	
