@@ -26,10 +26,15 @@ public class UsuarioService {
 			String usernameUser = user.getUsername().toLowerCase();
 			String passwordUser = user.getPassword();
 			if(usernameUser.equals(username) && passwordUser.equals(password)) {
-				login = "Valido";
-				break;
+				if(user.getSession()) {
+					login = "Valido";
+					break;
+				}
+				else {
+					login = "Already logged in"; 
+					break;
 			}
-		}
+		}}
 		return login;
 		
 	}

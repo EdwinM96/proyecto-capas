@@ -232,5 +232,35 @@ public class Usuario {
 	    public void setPassword(String password) {
 	        this.password = password;
 	    }
+
+
+		public Boolean getSession() {
+			return session;
+		}
+
+
+		public void setSession(Boolean session) {
+			this.session = session;
+		}
+
+
+		public Boolean getEstado() {
+			return estado;
+		}
+
+
+		public void setEstado(Boolean estado) {
+			this.estado = estado;
+		}
+
+
+		public void setSaldo(Float saldo) {
+			this.saldo = saldo;
+		}
+
+
+		public void setEdad(Integer edad) {
+			this.edad = edad;
+		}
 	    
 }

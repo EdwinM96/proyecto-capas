@@ -41,6 +41,60 @@ public class Ticket {
 	
 	@Column(name="f_creacion")
 	private Calendar fCreacion;
+
+	
+	public Ticket() {
+		super();
+	}
+
+	public Integer getIdTicket() {
+		return idTicket;
+	}
+
+	public void setIdTicket(Integer idTicket) {
+		this.idTicket = idTicket;
+	}
+
+	public Funcion getFuncion() {
+		return funcion;
+	}
+
+	public void setFuncion(Funcion funcion) {
+		this.funcion = funcion;
+	}
+
+	public Integer getNumAsientos() {
+		return numAsientos;
+	}
+
+	public void setNumAsientos(Integer numAsientos) {
+		this.numAsientos = numAsientos;
+	}
+
+	public Integer getNumTrans() {
+		return numTrans;
+	}
+
+	public void setNumTrans(Integer numTrans) {
+		this.numTrans = numTrans;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	public Calendar getfCreacion() {
+		return fCreacion;
+	}
+
+	public void setfCreacion(Calendar fCreacion) {
+		this.fCreacion = fCreacion;
+	}
+	
 	
 	
 }

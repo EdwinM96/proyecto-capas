@@ -20,6 +20,11 @@
   			<strong>Fallo de Sesión!</strong> Vuelva a intentarlo con las credenciales correctas.
 				</div>
         </c:if>
+        <c:if test = "${loggedIn}">
+        	<div class="alert alert-danger" role="alert">
+  			<strong>Fallo de Sesión!</strong> Su cuenta ya tiene una sesion activa.
+				</div>
+        </c:if>
             <div class="row justify-content-center">
                 <div class="col col-lg-6">
                     <form:form action="${pageContext.request.contextPath}/login" method="POST" modelAttribute="usuario" id="loginForm">

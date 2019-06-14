@@ -55,6 +55,12 @@ public class MainController {
 			mv.addObject("usuario",usuario.getUsername());
 			mv.setViewName("adminViews/dashboard");
 		}
+		else if(loginAdmin.equals("Already logged in")) {
+			mv.addObject("loggedIn",true);
+			usuario = new Usuario();
+			mv.addObject("usuario",usuario);
+			mv.setViewName("main");
+		}
 		else {
 			mv.addObject("fallido",true);
 			usuario = new Usuario();
