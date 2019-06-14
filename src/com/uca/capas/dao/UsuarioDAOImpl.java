@@ -48,4 +48,17 @@ public class UsuarioDAOImpl implements UsuarioDAO{
 		Usuario usuario = (Usuario) query.getSingleResult();
 		return usuario;
 	}
+
+	@Override
+	public void changeLoginFlag(String username, Boolean flag) {
+		StringBuffer sb = new StringBuffer();
+		sb.append("update public.usuario set b_sesion = ?1 where username=?2");
+		
+		Query query = entityM.createNativeQuery(sb.toString());
+		query.setParameter(1, flag);
+		query.setParameter(2, username);
+		
+		query.executeUpdate();
+		
+	}
 }
