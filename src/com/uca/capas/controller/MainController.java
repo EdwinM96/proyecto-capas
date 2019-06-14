@@ -37,9 +37,9 @@ public class MainController {
 		if(!r.hasErrors()) {
 		String login = usuarioService.login(usuario.getUsername(), usuario.getPassword());
 		if(login.equals("Valido")) {
-			
-			mv.setViewName("dashboard");
+
 			mv.addObject("usuario",usuario.getUsername());
+			mv.setViewName("dashboard");
 		}
 		else {
 			mv.setViewName("main");

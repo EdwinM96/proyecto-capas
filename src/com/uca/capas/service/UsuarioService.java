@@ -14,7 +14,7 @@ public class UsuarioService {
 	UsuarioDAO usuarioDao;
 	
 	
-	public List<Usuario> findAll(){
+	public List<Usuario> listAll(){
 		return usuarioDao.findAll();
 	}
 	

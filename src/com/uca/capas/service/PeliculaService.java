@@ -12,7 +12,7 @@ public class PeliculaService {
 	@Autowired
 	PeliculaDAO peliculaDao;
 	
-	public List<Pelicula> findAll(){
+	public List<Pelicula> listAll(){
 		return peliculaDao.listAll();
 	}
 }
