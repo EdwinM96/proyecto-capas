@@ -8,5 +8,6 @@ public interface FuncionDAO {
 
 	public List<Funcion> findAll();
 	public List<Funcion> findAllLimit(int limite);
+	public List<Funcion> findAllCurrentFunction();
 	
 }

@@ -35,4 +35,14 @@ public class FuncionDAOImpl implements FuncionDAO{
 		return results;
 	}
 
+	@Override
+	public List<Funcion> findAllCurrentFunction() {
+		// TODO Auto-generated method stub
+		StringBuffer sb = new StringBuffer();
+		sb.append("");
+		return null;
+	}
+	
+	
+
 }
