@@ -39,9 +39,13 @@ public class FuncionDAOImpl implements FuncionDAO{
 	public List<Funcion> findAllCurrentFunction() {
 		// TODO Auto-generated method stub
 		StringBuffer sb = new StringBuffer();
-		sb.append("");
-		return null;
+		sb.append("select * from public.funcion where fecha = current_date");
+		Query query = entityManager.createNativeQuery(sb.toString(),Funcion.class);
+		List<Funcion> results = query.getResultList();
+		return results;
 	}
+
+	
 	
 	
 

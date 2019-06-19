@@ -17,4 +17,10 @@ public class TicketService {
 	public List<Ticket> listAll(){
 		return ticketDao.findAll();
 	}
+	
+	
+	public void insert(Ticket ticket) {
+		ticketDao.Insert(ticket);
+	}
+	
 }

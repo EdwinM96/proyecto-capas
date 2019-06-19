@@ -35,6 +35,11 @@ public class Funcion {
 	@Column (name="hora")
 	private String hora;
 	
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(iso = ISO.DATE)
+	@Column (name="fecha")
+	private Calendar fecha;
+	
 	@Column (name="sala")
 	private String sala;
 	

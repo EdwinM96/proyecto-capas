@@ -17,4 +17,8 @@ public class FuncionService {
 	public List<Funcion> listAll(){
 		return funcionDao.findAll();
 	}
+	
+	public List<Funcion> CurrentsFunctions(){
+		return funcionDao.findAllCurrentFunction();
+	}
 }

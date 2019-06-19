@@ -29,6 +29,7 @@ public class MainController {
 	@Autowired
 	public AdministradorService adminService;
 	
+	
 	Usuario usuario;
 	
 	@RequestMapping("/")
@@ -41,19 +42,20 @@ public class MainController {
 	}
 	
 	@RequestMapping(value="/login", method = RequestMethod.POST)
-	public ModelAndView login(@Valid @ModelAttribute("usuario") Usuario usuario, BindingResult r) throws ServletException, IOException {
+	public ModelAndView login(@Valid @ModelAttribute("usuario") Usuario usuario, BindingResult r,HttpServletRequest request) throws ServletException, IOException {
 		ModelAndView mv = new ModelAndView();
-		//Debe ir aquí Lógica de Login de Usuario y admin
 		if(!r.hasErrors()) {
 		String login = usuarioService.login(usuario.getUsername(), usuario.getPassword());
 		String loginAdmin = adminService.loginAdmin(usuario.getUsername(), usuario.getPassword());
 		if(login.equals("Valido")) {
 			mv.addObject("usuario",usuario.getUsername());
 			mv.setViewName("usuarioViews/dashboard");
+			request.getSession().setAttribute("user", usuario);
 		}
 		else if (loginAdmin.equals("Valido")) {
 			mv.addObject("usuario",usuario.getUsername());
 			mv.setViewName("adminViews/dashboard");
+			request.getSession().setAttribute("user", usuario);
 		}
 		else if(loginAdmin.equals("Already logged in")) {
 			mv.addObject("loggedIn",true);
