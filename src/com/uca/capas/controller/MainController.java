@@ -33,16 +33,51 @@ public class MainController {
 	Usuario usuario;
 	
 	@RequestMapping("/")
-	public ModelAndView main() {
+	public ModelAndView main(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView();
+		Usuario usr = (Usuario)request.getSession().getAttribute("user");
+		if(usr != null ) {
+			mv.addObject("usuario",usr.getUsername());
+		
+			mv.setViewName("usuarioViews/dashboard");
+			return mv;
+		}
+		
+		
 		mv.setViewName("main");
 		usuario = new Usuario();
 		mv.addObject("usuario", usuario);
 		return mv;
 	}
 	
+	@RequestMapping(value="/login", method = RequestMethod.GET)
+	public ModelAndView Login(HttpServletRequest request) {
+		
+		Usuario usr = (Usuario)request.getSession().getAttribute("user");
+		ModelAndView mv = new ModelAndView();
+		if(usr != null ) {
+			mv.addObject("usuario",usr.getUsername());
+			mv.setViewName("usuarioViews/dashboard");
+		}else {
+			mv.setViewName("main");
+			usuario = new Usuario();
+			mv.addObject("usuario", usuario);
+				
+		}
+		
+		
+		
+		
+		
+		
+		return mv;
+	}
+	
+	
 	@RequestMapping(value="/login", method = RequestMethod.POST)
-	public ModelAndView login(@Valid @ModelAttribute("usuario") Usuario usuario, BindingResult r,HttpServletRequest request) throws ServletException, IOException {
+	public ModelAndView login(@Valid @ModelAttribute("usuario") Usuario usuario, BindingResult r,HttpServletRequest request) 
+			throws ServletException, IOException {
+		
 		ModelAndView mv = new ModelAndView();
 		String login = usuarioService.login(usuario.getUsername(), usuario.getPassword());
 		if(!r.hasErrors()) {
