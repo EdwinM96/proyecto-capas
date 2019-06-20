@@ -44,10 +44,10 @@ public class MainController {
 	@RequestMapping(value="/login", method = RequestMethod.POST)
 	public ModelAndView login(@Valid @ModelAttribute("usuario") Usuario usuario, BindingResult r,HttpServletRequest request) throws ServletException, IOException {
 		ModelAndView mv = new ModelAndView();
-		if(!r.hasErrors()) {
 		String login = usuarioService.login(usuario.getUsername(), usuario.getPassword());
+		if(!r.hasErrors()) {
 		String loginAdmin = adminService.loginAdmin(usuario.getUsername(), usuario.getPassword());
-		if(login.equals("Valido")) {
+		if(login.equals("Valido") || login.equals("Already logged in")) {
 			mv.addObject("usuario",usuario.getUsername());
 			mv.setViewName("usuarioViews/dashboard");
 			request.getSession().setAttribute("user", usuario);
