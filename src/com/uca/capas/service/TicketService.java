@@ -19,8 +19,8 @@ public class TicketService {
 	}
 	
 	
-	public void insert(Ticket ticket) {
-		ticketDao.Insert(ticket);
+	public boolean insert(Ticket ticket) {
+		return ticketDao.Insert(ticket);
 	}
 	
 }

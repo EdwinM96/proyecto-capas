@@ -83,9 +83,21 @@ public class MainController {
 		if(!r.hasErrors()) {
 		String loginAdmin = adminService.loginAdmin(usuario.getUsername(), usuario.getPassword());
 		if(login.equals("Valido") || login.equals("Already logged in")) {
-			mv.addObject("usuario",usuario.getUsername());
-			mv.setViewName("usuarioViews/dashboard");
-			request.getSession().setAttribute("user", usuario);
+			if(request.getSession().getAttribute("redirect") != null) {
+				if(request.getSession().getAttribute("redirect").toString().equals("funciones")) {
+					request.getSession().setAttribute("user", usuario);
+					request.getSession().removeAttribute("redirect");
+					return (new PeliculaController()).funcionesCurrents(request);
+				}else {
+					//en teoria no deberia entrar aqui nunca
+				}
+			}else {
+				mv.addObject("usuario",usuario.getUsername());
+				mv.setViewName("usuarioViews/dashboard");
+				request.getSession().setAttribute("user", usuario);
+				
+			}
+			
 		}
 		else if (loginAdmin.equals("Valido")) {
 			mv.addObject("usuario",usuario.getUsername());

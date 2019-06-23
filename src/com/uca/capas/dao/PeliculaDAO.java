@@ -10,4 +10,6 @@ public interface PeliculaDAO {
 	public List<Pelicula> findAllLimit(int limite);
 	
 	public Pelicula findPelicula(String titulo);
+	public List<Pelicula> findAllCurrentPeliculas();
+	
 }

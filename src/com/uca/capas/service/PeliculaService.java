@@ -17,4 +17,9 @@ public class PeliculaService {
 	public List<Pelicula> listAll(){
 		return peliculaDao.listAll();
 	}
+	
+	
+	public List<Pelicula> CurrentPelis() {
+		return peliculaDao.findAllCurrentPeliculas();
+	}
 }
