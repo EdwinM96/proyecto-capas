@@ -64,12 +64,6 @@ public class MainController {
 			mv.addObject("usuario", usuario);
 				
 		}
-		
-		
-		
-		
-		
-		
 		return mv;
 	}
 	
@@ -82,17 +76,19 @@ public class MainController {
 		String login = usuarioService.login(usuario.getUsername(), usuario.getPassword());
 		if(!r.hasErrors()) {
 		String loginAdmin = adminService.loginAdmin(usuario.getUsername(), usuario.getPassword());
-		if(login.equals("Valido") || login.equals("Already logged in")) {
+		if(login.contains("Valido")) {
 			mv.addObject("usuario",usuario.getUsername());
 			mv.setViewName("usuarioViews/dashboard");
-			request.getSession().setAttribute("user", usuario);
+			request.getSession().setAttribute("id", login.replaceFirst("Valido",""));
+			request.getSession().setAttribute("rol", "usuario");
 		}
-		else if (loginAdmin.equals("Valido")) {
+		else if (loginAdmin.contains("Valido")) {
 			mv.addObject("usuario",usuario.getUsername());
 			mv.setViewName("adminViews/dashboard");
 			request.getSession().setAttribute("user", usuario);
+			request.getSession().setAttribute("rol", "admin");
 		}
-		else if(loginAdmin.equals("Already logged in")) {
+		else if(loginAdmin.equals("Already logged in") || login.contentEquals("Already logged in")) {
 			mv.addObject("loggedIn",true);
 			usuario = new Usuario();
 			mv.addObject("usuario",usuario);
