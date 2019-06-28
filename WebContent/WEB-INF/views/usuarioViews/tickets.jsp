@@ -50,6 +50,14 @@
                      <th>Asientos</th>
                  </tr>
              </thead>
+		 <tr>
+		   <c:forEach items="${tickets}" var="ticket" >
+ 				<td>${ticket.funcion.pelicula.titulo}</td>
+			   <td>${ticket.funcion.fecha}</td>
+			   <td>${ticket.funcion.hora}</td>
+			   <td>${ticket.numAsientos}</td>
+		   </c:forEach>
+		 </tr>
  
          </table>
         </div>
@@ -60,27 +68,7 @@
     </div>
     
     <script>
-      $( document ).ready(function() {
- $('#paginatedTable').DataTable( {
-        "processing": true,
-        "serverSide": true,
-        "pageLength": 5,
-        "ajax": {
-            "url": "/user/tickets",
-            "data": function ( data ) {
- //process data before sent to server.
-         }},
-        "columns": [
-                    { "data": "Pelicula", "name" : "pelicula", "title" : "pelicula"  },
-                    { "data": "fecha", "name" : "fecha" , "title" : "fecha"},
-                    
-                    { "data": "hora", "name" : "hora" , "title" : "hora"},
-                    { "data": "asientos", "name" : "asientos" , "title" : "asientos"}
-                ]    
- });
- 
- $('#paginatedTable').dataTable().fnSetFilteringEnterPress();
-});
+   
     
     </script>
       
