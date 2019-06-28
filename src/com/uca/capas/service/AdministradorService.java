@@ -39,7 +39,6 @@ public class AdministradorService {
 	
 	@Transactional
 	public void logoutAdmin(String username) {
-		System.out.println(username);	
 		List<Administrador> adminList = listAll();
 		for (Administrador admin:adminList) {
 			String usernameAdmin = admin.getUsername().toLowerCase();

@@ -1,6 +1,7 @@
 package com.uca.capas.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.uca.capas.domain.Pelicula;
 import com.uca.capas.domain.Usuario;
 import com.uca.capas.service.AdministradorService;
+import com.uca.capas.service.PeliculaService;
 import com.uca.capas.service.UsuarioService;
 
 @Controller
@@ -29,6 +32,8 @@ public class MainController {
 	@Autowired
 	public AdministradorService adminService;
 	
+	@Autowired
+	public PeliculaService peliService;
 	
 	Usuario usuario;
 	
@@ -83,7 +88,10 @@ public class MainController {
 			request.getSession().setAttribute("rol", "usuario");
 		}
 		else if (loginAdmin.contains("Valido")) {
+			List<Pelicula> peliculas = peliService.listAll();
 			mv.addObject("usuario",usuario.getUsername());
+			System.out.println(peliculas.toString());
+			mv.addObject("peliculas", peliculas);
 			mv.setViewName("adminViews/dashboard");
 			request.getSession().setAttribute("username", loginAdmin.replaceFirst("Valido",""));
 			request.getSession().setAttribute("rol", "admin");
