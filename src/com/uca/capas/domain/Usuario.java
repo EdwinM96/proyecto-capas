@@ -99,32 +99,42 @@ public class Usuario {
 		}
 
 
-		public float getSaldo() {
+		public Integer getIdUsuario() {
+			return idUsuario;
+		}
+
+
+		public void setIdUsuario(Integer idUsuario) {
+			this.idUsuario = idUsuario;
+		}
+
+
+		public Float getSaldo() {
 			return saldo;
 		}
 
 
-		public void setSaldo(float saldo) {
+		public void setSaldo(Float saldo) {
 			this.saldo = saldo;
 		}
 
 
-		public boolean isSesion() {
+		public Boolean getSession() {
 			return session;
 		}
 
 
-		public void setSesion(boolean session) {
+		public void setSession(Boolean session) {
 			this.session = session;
 		}
 
 
-		public boolean isEstado() {
+		public Boolean getEstado() {
 			return estado;
 		}
 
 
-		public void setEstado(boolean estado) {
+		public void setEstado(Boolean estado) {
 			this.estado = estado;
 		}
 
@@ -159,12 +169,12 @@ public class Usuario {
 		}
 
 
-		public int getEdad() {
+		public Integer getEdad() {
 			return edad;
 		}
 
 
-		public void setEdad(int edad) {
+		public void setEdad(Integer edad) {
 			this.edad = edad;
 		}
 
@@ -209,58 +219,26 @@ public class Usuario {
 		}
 
 
-		public Integer getIdUsuario() {
-	        return idUsuario;
-	    }
-
-	    public void setIdUsuario(Integer idUsuario) {
-	        this.idUsuario = idUsuario;
-	    }
-
-	    public String getUsername() {
-	        return username;
-	    }
-
-	    public void setUsername(String username) {
-	        this.username = username;
-	    }
-
-	    public String getPassword() {
-	        return password;
-	    }
-
-	    public void setPassword(String password) {
-	        this.password = password;
-	    }
-
-
-		public Boolean getSession() {
-			return session;
+		public String getUsername() {
+			return username;
 		}
 
 
-		public void setSession(Boolean session) {
-			this.session = session;
+		public void setUsername(String username) {
+			this.username = username;
 		}
 
 
-		public Boolean getEstado() {
-			return estado;
+		public String getPassword() {
+			return password;
 		}
 
 
-		public void setEstado(Boolean estado) {
-			this.estado = estado;
+		public void setPassword(String password) {
+			this.password = password;
 		}
 
 
-		public void setSaldo(Float saldo) {
-			this.saldo = saldo;
-		}
-
-
-		public void setEdad(Integer edad) {
-			this.edad = edad;
-		}
+		
 	    
 }

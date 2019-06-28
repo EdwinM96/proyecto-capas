@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -120,6 +121,7 @@ public class UserController {
 		return mv;
 	}
 	
+	@Transactional
 	@RequestMapping("/saveReserva")
 	public ModelAndView ejecutarReserva(HttpServletRequest request, @ModelAttribute("ticket") Ticket ticket) {
 		HttpSession session = request.getSession();
@@ -140,8 +142,9 @@ public class UserController {
 			return mv;
 		}
 		HttpSession sesion = request.getSession();
-		Integer usuarioId = (Integer) session.getAttribute("id");
-		Usuario usuario = usuarioRepo.getOne(usuarioId);
+		Integer usuarioId = Integer.parseInt( (String) session.getAttribute("id"));
+		Usuario usuario = usuarioService.findUsuario(usuarioId);
+		System.out.println(usuario.getSaldo().toString());
 		if(usuario.getSaldo()<(numAsientos*3.5)) {
 			mv.addObject("noMoney",true);
 			mv.addObject("idFuncion",ticket.getFuncion());

@@ -10,5 +10,4 @@ public interface FuncionDAO {
 	public List<Funcion> findAllLimit(int limite);
 	public List<Funcion> findAllCurrentFunction();
 	public List<Funcion> findFuncionPelicula(Integer idPelicula);
-	public boolean 
 }

@@ -27,6 +27,10 @@ public class UsuarioService {
 		return usuarioDao.findAll();
 	}
 	
+	public Usuario findUsuario(Integer id) {
+		return usuarioDao.findUser(id);
+	}
+	
 	@Transactional
 	public Boolean editarUsuario(Usuario usuario) {
 		entityManager.merge(usuario);

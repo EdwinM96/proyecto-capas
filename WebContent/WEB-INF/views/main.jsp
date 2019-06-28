@@ -40,7 +40,7 @@
 
                         <label>Constraseña:</label>
                         <form:input type="password" name="password" path="password"/><br>
-                        <input type="submit" value="Acceder">
+                        <input type="submit" value="Acceder" class="btn btn-primary">
                     </form:form>
                 </div>
 

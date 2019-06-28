@@ -50,6 +50,18 @@ public class UsuarioDAOImpl implements UsuarioDAO{
 	}
 
 	@Override
+	public Usuario findUser(Integer id) {
+		StringBuffer sb = new StringBuffer();
+		sb.append("select * from public.usuario where id_usuario = ?1 limit 1 ");
+		
+		Query query = entityM.createNativeQuery(sb.toString(), Usuario.class);
+		query.setParameter(1, id);
+		
+		Usuario usuario = (Usuario) query.getSingleResult();
+		return usuario;
+	}
+	
+	@Override
 	public void changeLoginFlag(String username, Boolean flag) {
 		StringBuffer sb = new StringBuffer();
 		sb.append("update public.usuario set b_sesion = ?1 where username=?2");
