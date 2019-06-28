@@ -2,12 +2,21 @@ package com.uca.capas.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table(schema="public", name="administrador")
 public class Administrador {
+	
+	/*@Id
+	@GeneratedValue(generator="administrador_id_admin_seq", strategy = GenerationType.AUTO)
+	@SequenceGenerator(name = "administrador_id_admin_seq", sequenceName = "public.administrador_id_admin_seq")
+	@Column (name="id_admin")
+	private Integer idAdministrador;*/
 	
 	@Id
 	@Column (name="username")
@@ -17,20 +26,38 @@ public class Administrador {
 	private String password;
 	
 	@Column (name="b_sesion")
-	private boolean session;
+	private Boolean session;
 
 	
 	
-	public Administrador(String username, String password, boolean session) {
+	
+	/*public Administrador(Integer idAdministrador, String username, String password, Boolean session) {
+		super();
+		this.idAdministrador = idAdministrador;
+		this.username = username;
+		this.password = password;
+		this.session = session;
+	}*/
+	
+	public Administrador(String username, String password, Boolean session) {
 		super();
 		this.username = username;
 		this.password = password;
 		this.session = session;
 	}
-
+	
 	public Administrador() {
 		super();
 	}
+
+	
+	/*public Integer getIdAdministrador() {
+		return idAdministrador;
+	}
+
+	public void setIdAdministrador(Integer idAdministrador) {
+		this.idAdministrador = idAdministrador;
+	}*/
 
 	public String getUsername() {
 		return username;
@@ -48,11 +75,11 @@ public class Administrador {
 		this.password = password;
 	}
 
-	public boolean isSession() {
+	public Boolean getSession() {
 		return session;
 	}
 
-	public void setSession(boolean session) {
+	public void setSession(Boolean session) {
 		this.session = session;
 	}
 	

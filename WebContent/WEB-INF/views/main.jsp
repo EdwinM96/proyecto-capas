@@ -25,8 +25,8 @@
   			<strong>Fallo de Sesión!</strong> Su cuenta ya tiene una sesion activa.
 				</div>
         </c:if>
-            <div class="row justify-content-center">
-                <div class="col col-lg-6">
+            <div class="row text-center">
+                <div class="">
                     <form:form action="${pageContext.request.contextPath}/login" method="POST" modelAttribute="usuario" id="loginForm">
 
                         <label>Usuario:</label>

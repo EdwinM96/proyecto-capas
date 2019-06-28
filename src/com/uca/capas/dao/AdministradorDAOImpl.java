@@ -18,13 +18,10 @@ public class AdministradorDAOImpl implements AdministradorDAO {
 	@Override
 	public List<Administrador> findAll() {
 		StringBuffer sb = new StringBuffer();
-		//Defino la consulta
-		sb.append("select * from public.administrador");
-		//Creo un objeto Query a partir del entityManager para ejecutar la consulta
-		Query query = entityManager.createNativeQuery(sb.toString(), Administrador.class);
-		//Ejecuto la consulta y establezco el resultado a una coleccion de Clientes
-		List<Administrador> list = query.getResultList();
 		
+		sb.append("select * from public.administrador");
+		Query query = entityManager.createNativeQuery(sb.toString(), Administrador.class);
+		List<Administrador> list = (List<Administrador>)query.getResultList();
 		return list;
 	}
 

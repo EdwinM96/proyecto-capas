@@ -17,7 +17,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableTransactionManagement
-@EnableJpaRepositories(basePackages = {"com.uca.capas.repository","com.uca.capas.dao"})
+@EnableJpaRepositories(basePackages = {"com.uca.capas.repository","com.uca.capas.dao","com.uca.capas.domain"})
 public class JPAConfiguration {
 
 	@Bean

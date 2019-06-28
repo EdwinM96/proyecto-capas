@@ -85,7 +85,7 @@ public class MainController {
 		else if (loginAdmin.contains("Valido")) {
 			mv.addObject("usuario",usuario.getUsername());
 			mv.setViewName("adminViews/dashboard");
-			request.getSession().setAttribute("user", usuario);
+			request.getSession().setAttribute("username", loginAdmin.replaceFirst("Valido",""));
 			request.getSession().setAttribute("rol", "admin");
 		}
 		else if(loginAdmin.equals("Already logged in") || login.contentEquals("Already logged in")) {

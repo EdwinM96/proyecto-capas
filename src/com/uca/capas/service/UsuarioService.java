@@ -37,7 +37,6 @@ public class UsuarioService {
 	@Transactional
 	public void logout(Integer id) {
 		Usuario usuario = usuarioRepo.findOne(id);
-		//Usuario usuario = usuarioDao.findUser(username);
 		usuario.setSession(false);
 		editarUsuario(usuario);
 	}
