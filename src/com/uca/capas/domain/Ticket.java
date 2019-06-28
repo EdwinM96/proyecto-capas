@@ -18,8 +18,8 @@ import javax.persistence.Table;
 public class Ticket {
 
 	@Id
-	@GeneratedValue(generator="ticket_c_ticket_seq", strategy = GenerationType.AUTO)
-	@SequenceGenerator(name = "ticket_c_ticket_seq", sequenceName = "store.ticket_c_ticket_seq")
+	@GeneratedValue(generator="ticket_id_ticket_seq", strategy = GenerationType.AUTO)
+	@SequenceGenerator(name = "ticket_id_ticket_seq", sequenceName = "public.ticket_id_ticket_seq")
 	@Column (name="id_ticket")
 	private Integer idTicket;
 	
@@ -31,7 +31,7 @@ public class Ticket {
 	private Integer numAsientos;
 	
 	@GeneratedValue(generator="ticket_num_trans_seq", strategy = GenerationType.AUTO)
-	@SequenceGenerator(name = "ticket_num_trans_seq", sequenceName = "store.ticket_num_trans_seq")
+	@SequenceGenerator(name = "ticket_num_trans_seq", sequenceName = "public.ticket_num_trans_seq")
 	@Column(name="num_trans")
 	private Integer numTrans;
 	

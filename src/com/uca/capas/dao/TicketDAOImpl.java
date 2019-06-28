@@ -38,15 +38,10 @@ public class TicketDAOImpl implements TicketDAO {
 
 	@Override
 	public boolean Insert(Ticket ticket) {
-		if(ticket.getNumAsientos() <= this.Avaliableseats(ticket.getFuncion())) {
 			entityManager.persist(ticket);
-			return true;
-		}
-		return false;
-		
-	
-		
+			return true;		
 	}
+
 
 	@Override
 	public int Avaliableseats(Funcion fun) {

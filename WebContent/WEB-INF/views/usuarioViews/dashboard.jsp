@@ -44,7 +44,7 @@
       <c:forEach items="${peliculas}" var="pelicula" >
       <div class="col-lg-4" style="margin-top:10px;">
       <div class="card">
-      	<div class="text-center"><a href="user/funcion?idPelicula=${pelicula.idPelicula}&pelicula=${pelicula.titulo}"><img src="${pelicula.imagen}"></a></div>
+      	<div class="text-center"><a href="${pageContext.request.contextPath}/user/funcion?idPelicula=${pelicula.idPelicula}&pelicula=${pelicula.titulo}"><img src="${pelicula.imagen}"></a></div>
       	<div class="text-center"><h2>${pelicula.titulo}</h2></div>
       	</div>
       	</div>

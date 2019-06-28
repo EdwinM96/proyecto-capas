@@ -25,6 +25,7 @@ import com.uca.capas.repository.FuncionRepository;
 import com.uca.capas.repository.UsuarioRepository;
 import com.uca.capas.service.FuncionService;
 import com.uca.capas.service.PeliculaService;
+import com.uca.capas.service.TicketService;
 import com.uca.capas.service.UsuarioService;
 
 @Controller
@@ -47,6 +48,9 @@ public class UserController {
 	
 	@Autowired
 	public FuncionRepository funcionRepo;
+	
+	@Autowired
+	public TicketService ticketService;
 	
 	@RequestMapping("/logout")
 	public ModelAndView logout(HttpServletRequest request) {
@@ -116,12 +120,30 @@ public class UserController {
 		}
 		Ticket ticket = new Ticket();
 		mv.addObject("idFuncion",idFuncion);
+		session.setAttribute("idFuncion",idFuncion);
+		System.out.println(idFuncion.toString());
 		mv.addObject("ticket", ticket);
 		mv.setViewName("usuarioViews/reserva");
 		return mv;
 	}
 	
-	@Transactional
+	@RequestMapping("/verTickets")
+	public ModelAndView verTickets(HttpServletRequest request){
+		HttpSession session = request.getSession();
+		ModelAndView mv = new ModelAndView();
+		Integer id = Integer.parseInt((String) session.getAttribute("id"));
+		if(id == null || id.toString().isEmpty()) {
+			usuario = new Usuario();
+			mv.addObject("usuario", usuario);
+			mv.setViewName("main");
+			return mv;
+			
+		}
+		mv.addObject("tickets",ticketService.listAll());
+		mv.setViewName("usuarioViews/tickets");
+		return mv;
+	}
+	
 	@RequestMapping("/saveReserva")
 	public ModelAndView ejecutarReserva(HttpServletRequest request, @ModelAttribute("ticket") Ticket ticket) {
 		HttpSession session = request.getSession();
@@ -137,7 +159,7 @@ public class UserController {
 		Integer numAsientos = ticket.getNumAsientos();
 		if(numAsientos>15) {
 			mv.addObject("tooMany",true);
-			mv.addObject("idFuncion", ticket.getFuncion());
+			mv.addObject("idFuncion", ticket.getIdTicket());
 			mv.setViewName("usuarioViews/reserva");
 			return mv;
 		}
@@ -151,12 +173,19 @@ public class UserController {
 			mv.setViewName("usuarioViews/reserva");
 			return mv;
 		}
-		Integer funcionId = ticket.getFuncion().getIdFuncion();
+		System.out.println(session.getAttribute("idFuncion").toString());
+		Integer funcionId = Integer.parseInt( session.getAttribute("idFuncion").toString());
+		if(funcionId.equals(null)) {
+			List <Pelicula> peliculas = peliService.listAll();
+			mv.addObject("peliculas", peliculas);
+			mv.setViewName("usuarioViews/dashboard");
+			return mv;
+		}
 		Funcion funcion = funcionRepo.getOne(funcionId);
 		if(funcion.getAsientosDisp()<numAsientos) {
 			mv.addObject("noAsientos",true);
 			mv.addObject("disponibles",funcion.getAsientosDisp());
-			mv.addObject("idFuncion",ticket.getFuncion());
+			mv.addObject("idFuncion",funcionId);
 			mv.setViewName("usuarioViews/reserva");
 			return mv;
 		}
@@ -170,6 +199,13 @@ public class UserController {
 		ticket.setFuncion(funcion);
 		ticket.setNumAsientos(numAsientos);
 		ticket.setfCreacion(fecha);
+		Double doubleMath = Math.random()*100;
+		int integer = doubleMath.intValue();
+		integer = Math.abs(integer);
+		ticket.setNumTrans((Integer)(integer));
+		ticketService.insert(ticket);
+		List <Pelicula> peliculas = peliService.listAll();
+		mv.addObject("peliculas", peliculas);
 		mv.addObject("ticket", true);
 		mv.setViewName("usuarioViews/dashboard");
 		return mv;
