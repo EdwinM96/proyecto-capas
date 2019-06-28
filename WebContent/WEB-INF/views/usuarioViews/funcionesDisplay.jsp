@@ -5,6 +5,12 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
+	<link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
+	<style>
+      body {
+        font-family: 'DM Sans', sans-serif;
+      }
+    </style>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<title>Funciones</title>
 </head>
@@ -29,13 +35,18 @@
         </div>
       </nav>
       <div class="container" style="background-color: light blue;">
-      <div style="text-center center-text"><h1>Funciones para: ${pelicula}</h1></div>
+      <div class="text-center center-text"><h1>Funciones para: ${pelicula}</h1></div>
+      <div class= "row" style="margin-top:20px; margin-bottom:10px; border:1px solid black">
+      <div class="col-4 text-center center-text"><h3>Hora</h3></div>
+      <div class="col-4 text-center center-text"><h3>Fecha</h3></div>
+      <div class="col-4 text-center center-text"><h3>Sala</h3></div>
+      </div>
 		<c:forEach items="${funciones}" var="funcion">
 		<a href="${pageContext.request.contextPath}/user/reserva?funcion=${funcion.idFuncion}">
 		<div class = "row" style="margin-top:20px; border:1px solid blue;">
-		<div class="col-4">${funcion.hora}</div>
-		<div class="col-4"><fmt:formatDate value="${funcion.fecha.time}" type="date" dateStyle="short" /></div>
-		<div class="col-4">${funcion.sala}</div>
+		<div class="col-4 text-center center-text">${funcion.hora}</div>
+		<div class="col-4 text-center center-text"><fmt:formatDate value="${funcion.fecha.time}" type="date" dateStyle="short" /></div>
+		<div class="col-4 text-center center-text">${funcion.sala}</div>
 		</div></a>
 		</c:forEach>
       
