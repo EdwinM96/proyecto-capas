@@ -82,16 +82,14 @@ public class MainController {
 		if(!r.hasErrors()) {
 		String loginAdmin = adminService.loginAdmin(usuario.getUsername(), usuario.getPassword());
 		if(login.contains("Valido")) {
+			List<Pelicula> peliculas = peliService.listAll();
+			mv.addObject("peliculas", peliculas);
 			mv.addObject("usuario",usuario.getUsername());
 			mv.setViewName("usuarioViews/dashboard");
 			request.getSession().setAttribute("id", login.replaceFirst("Valido",""));
 			request.getSession().setAttribute("rol", "usuario");
 		}
 		else if (loginAdmin.contains("Valido")) {
-			List<Pelicula> peliculas = peliService.listAll();
-			mv.addObject("usuario",usuario.getUsername());
-			System.out.println(peliculas.toString());
-			mv.addObject("peliculas", peliculas);
 			mv.setViewName("adminViews/dashboard");
 			request.getSession().setAttribute("username", loginAdmin.replaceFirst("Valido",""));
 			request.getSession().setAttribute("rol", "admin");
