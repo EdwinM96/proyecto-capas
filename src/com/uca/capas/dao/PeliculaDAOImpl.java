@@ -45,5 +45,17 @@ public class PeliculaDAOImpl implements PeliculaDAO{
 		Pelicula resultado = (Pelicula) query.getResultList();
 		return resultado;
 	}
+	@Override
+	public List<Pelicula> findAllCurrentPeliculas() {
+		StringBuffer sb = new StringBuffer();
+		sb.append("\r\n" + 
+				"select * from pelicula where id_pelicula in (\r\n" + 
+				"select distinct b.id_pelicula from funcion a\r\n" + 
+				"left outer join pelicula b on a.pelicula = b.id_pelicula\r\n" + 
+				"where a.fecha = current_date)");
+		Query query = entityManager.createNativeQuery(sb.toString(), Pelicula.class);
+		List<Pelicula> resultado = query.getResultList();
+		// TODO Auto-generated method stub
+		return resultado;
 
 }

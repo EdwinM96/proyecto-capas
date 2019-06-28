@@ -1,5 +1,6 @@
 package com.uca.capas.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,14 @@ public class FuncionService {
 	FuncionDAO funcionDao;
 	
 	public List<Funcion> listAll(){
-		return funcionDao.findAll();
+		List<Funcion> funciones = funcionDao.findAll();
+		List<Funcion> funcionesDisponibles = new ArrayList<Funcion>();
+		for(Funcion funcion:funciones) {
+			if(funcion.getEstado()) {
+				funciones.add(funcion);
+			}
+		}
+		return funcionesDisponibles;
 	}
 	
 	public List<Funcion> CurrentsFunctions(){

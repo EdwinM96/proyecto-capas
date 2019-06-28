@@ -64,11 +64,38 @@ public class Funcion {
 	@JoinColumn (name="a_creacion")
 	private Administrador aCreacion;
 
-	
+	@Column (name="estado")
+	private Boolean estado;
 	
 	public Funcion() {
 		super();
 	}
+	
+	
+
+	public Calendar getFecha() {
+		return fecha;
+	}
+
+
+
+	public void setFecha(Calendar fecha) {
+		this.fecha = fecha;
+	}
+
+
+
+	public Boolean getEstado() {
+		return estado;
+	}
+
+
+
+	public void setEstado(Boolean estado) {
+		this.estado = estado;
+	}
+
+
 
 	public Integer getIdFuncion() {
 		return idFuncion;

@@ -43,12 +43,12 @@ public class PeliculaController {
 	@RequestMapping(value="/funciones",method = RequestMethod.GET)
 	public ModelAndView funcionesCurrents(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView();
-		Usuario usr = (Usuario)request.getSession().getAttribute("user");
+		Integer usr = (Integer)request.getSession().getAttribute("id");
 		List<Pelicula> peliculas;
 		List<Funcion> funciones;
 		if(usr != null ) {
 			
-			peliculas = peliService.CurrentPelis();
+			peliculas = peliService.listAll();
 			funciones = funcionService.CurrentsFunctions();			
 			mv.addObject("peliculas", peliculas);
 			mv.addObject("funciones", funciones);
@@ -57,13 +57,6 @@ public class PeliculaController {
 			request.getSession().setAttribute("redirect", "funciones");
 			return (new MainController()).main(request);
 		}
-		
-		
-		
-		
-		
-		
-		
 		
 		return mv;
 	}
