@@ -2,10 +2,11 @@
     pageEncoding="ISO-8859-1"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-	<title>Dashboard Usuario</title>
+	<title>Funciones</title>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -17,19 +18,26 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="user/">Home<span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="${pageContext.request.contextPath}/user/">Home<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">Tickets</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="user/logout">Logout</a>
+              <a class="nav-link" href="${pageContext.request.contextPath}/user/logout">Logout</a>
             </li>          
         </div>
       </nav>
-      
-      <div class="container">
-
+      <div class="container" style="background-color: light blue;">
+      <div style="text-center center-text"><h1>Funciones para: ${pelicula}</h1></div>
+		<c:forEach items="${funciones}" var="funcion">
+		<a href="${pageContext.request.contextPath}/user/reserva?funcion=${funcion.idFuncion}">
+		<div class = "row" style="margin-top:20px; border:1px solid blue;">
+		<div class="col-4">${funcion.hora}</div>
+		<div class="col-4"><fmt:formatDate value="${funcion.fecha.time}" type="date" dateStyle="short" /></div>
+		<div class="col-4">${funcion.sala}</div>
+		</div></a>
+		</c:forEach>
       
       
       </div>

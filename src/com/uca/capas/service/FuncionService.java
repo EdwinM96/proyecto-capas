@@ -26,6 +26,10 @@ public class FuncionService {
 		return funcionesDisponibles;
 	}
 	
+	public List<Funcion> findFuncionesPelicula(Integer idPelicula){
+		return funcionDao.findFuncionPelicula(idPelicula);
+	}
+	
 	public List<Funcion> CurrentsFunctions(){
 		return funcionDao.findAllCurrentFunction();
 	}
