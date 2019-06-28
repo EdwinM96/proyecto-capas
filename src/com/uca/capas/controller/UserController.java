@@ -35,6 +35,7 @@ public class UserController {
 	public ModelAndView logout(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		Integer id = Integer.parseInt((String) session.getAttribute("id"));
+		session.removeAttribute("user");
 		usuarioService.logout(id);
 		ModelAndView mv = new ModelAndView();
 		usuario = new Usuario();
