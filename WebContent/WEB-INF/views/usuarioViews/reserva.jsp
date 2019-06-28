@@ -34,10 +34,13 @@
             </li>          
         </div>
       </nav>
-      <div class="container">
+      <div class="container text-center center-text">
       <form:form modelAttribute="ticket" action="${pageContext.request.contextPath}/user/saveReserva" id="reservarForm">
-      
+      			<input type="hidden" name="funcionId" value=${idFuncion}>
+      			<label>Asientos a reservar: </label> <input type="number" name="numAsientos">
+      			<input type="submit" value="Reservar" style="background-color:green">
       </form:form>
+      <div><h3>Le recordamos que la máxima cantidad de asientos que se pueden reservar son 15</h3></div>
       
       </div>
 </body>

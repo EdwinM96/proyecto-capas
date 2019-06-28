@@ -1,6 +1,7 @@
 package com.uca.capas.controller;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,15 +10,18 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.uca.capas.domain.Funcion;
 import com.uca.capas.domain.Pelicula;
 import com.uca.capas.domain.Ticket;
 import com.uca.capas.domain.Usuario;
 import com.uca.capas.repository.FuncionRepository;
+import com.uca.capas.repository.UsuarioRepository;
 import com.uca.capas.service.FuncionService;
 import com.uca.capas.service.PeliculaService;
 import com.uca.capas.service.UsuarioService;
@@ -31,6 +35,9 @@ public class UserController {
 	
 	@Autowired
 	public FuncionService funcionService;
+	
+	@Autowired
+	public UsuarioRepository usuarioRepo;
 	
 	@Autowired
 	public PeliculaService peliService;
@@ -95,7 +102,7 @@ public class UserController {
 	}
 	
 	@RequestMapping("/reserva")
-	public ModelAndView reserva(HttpServletRequest request) {
+	public ModelAndView reserva(HttpServletRequest request, @RequestParam(value = "funcion") Integer idFuncion) {
 		HttpSession session = request.getSession();
 		ModelAndView mv = new ModelAndView();
 		Integer id = Integer.parseInt((String) session.getAttribute("id"));
@@ -107,8 +114,64 @@ public class UserController {
 			
 		}
 		Ticket ticket = new Ticket();
+		mv.addObject("idFuncion",idFuncion);
 		mv.addObject("ticket", ticket);
+		mv.setViewName("usuarioViews/reserva");
 		return mv;
+	}
+	
+	@RequestMapping("/saveReserva")
+	public ModelAndView ejecutarReserva(HttpServletRequest request, @ModelAttribute("ticket") Ticket ticket) {
+		HttpSession session = request.getSession();
+		ModelAndView mv = new ModelAndView();
+		Integer id = Integer.parseInt((String) session.getAttribute("id"));
+		if(id == null || id.toString().isEmpty()) {
+			usuario = new Usuario();
+			mv.addObject("usuario", usuario);
+			mv.setViewName("main");
+			return mv;
+			
+		}
+		Integer numAsientos = ticket.getNumAsientos();
+		if(numAsientos>15) {
+			mv.addObject("tooMany",true);
+			mv.addObject("idFuncion", ticket.getFuncion());
+			mv.setViewName("usuarioViews/reserva");
+			return mv;
+		}
+		HttpSession sesion = request.getSession();
+		Integer usuarioId = (Integer) session.getAttribute("id");
+		Usuario usuario = usuarioRepo.getOne(usuarioId);
+		if(usuario.getSaldo()<(numAsientos*3.5)) {
+			mv.addObject("noMoney",true);
+			mv.addObject("idFuncion",ticket.getFuncion());
+			mv.setViewName("usuarioViews/reserva");
+			return mv;
+		}
+		Integer funcionId = ticket.getFuncion().getIdFuncion();
+		Funcion funcion = funcionRepo.getOne(funcionId);
+		if(funcion.getAsientosDisp()<numAsientos) {
+			mv.addObject("noAsientos",true);
+			mv.addObject("disponibles",funcion.getAsientosDisp());
+			mv.addObject("idFuncion",ticket.getFuncion());
+			mv.setViewName("usuarioViews/reserva");
+			return mv;
+		}
+		usuario.setSaldo((float)(usuario.getSaldo()-(numAsientos*3.5)));
+		usuarioService.editarUsuario(usuario);
+		funcion.setAsientosDisp(funcion.getAsientosDisp()-numAsientos);
+		funcionService.editarFuncion(funcion);
+		
+		Calendar fecha = Calendar.getInstance();		
+		ticket.setUsuario(usuario);
+		ticket.setFuncion(funcion);
+		ticket.setNumAsientos(numAsientos);
+		ticket.setfCreacion(fecha);
+		mv.addObject("ticket", true);
+		mv.setViewName("usuarioViews/dashboard");
+		return mv;
+		
+		
 	}
 	
 }
