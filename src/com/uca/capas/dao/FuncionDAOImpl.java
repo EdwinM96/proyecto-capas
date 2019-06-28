@@ -48,7 +48,7 @@ public class FuncionDAOImpl implements FuncionDAO{
 	@Override
 	public List<Funcion> findFuncionPelicula(Integer idPelicula){
 		StringBuffer sb = new StringBuffer();
-		sb.append("select * from public.funcion where pelicula = ?1 limit ?1");
+		sb.append("select * from public.funcion where pelicula = ?1");
 		Query query = entityManager.createNativeQuery(sb.toString(), Funcion.class);
 		query.setParameter(1, idPelicula);
 		List<Funcion> results = query.getResultList();

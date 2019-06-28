@@ -35,7 +35,9 @@
         </div>
       </nav>
       <div class="container">
-      <form:form modelAttribute="ticket" id="reservarForm"></form:form>
+      <form:form modelAttribute="ticket" action="${pageContext.request.contextPath}/user/saveReserva" id="reservarForm">
+      
+      </form:form>
       
       </div>
 </body>
