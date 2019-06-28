@@ -57,6 +57,6 @@ public class PeliculaDAOImpl implements PeliculaDAO{
 		List<Pelicula> resultado = query.getResultList();
 		// TODO Auto-generated method stub
 		return resultado;
-
+		}
 }
 	}
