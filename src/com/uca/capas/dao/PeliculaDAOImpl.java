@@ -59,4 +59,4 @@ public class PeliculaDAOImpl implements PeliculaDAO{
 		return resultado;
 		}
 }
-	}
+	
