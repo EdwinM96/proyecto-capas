@@ -62,7 +62,7 @@ public class UserController {
 		return mv;
 	}
 	
-	@RequestMapping(value = "/funcion" ,  method = RequestMethod.GET)
+	@RequestMapping("/funcion")
 	public ModelAndView funcion(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		ModelAndView mv = new ModelAndView();
@@ -74,7 +74,7 @@ public class UserController {
 			return mv;
 			
 		}
-		System.out.println(request.getAttribute("idPelicula")+"");
+		System.out.println(request.getParameter("idPelicula")+"");
 		return null;
 	}
 	

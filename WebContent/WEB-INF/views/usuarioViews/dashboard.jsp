@@ -30,7 +30,7 @@
       
       <div class="container">
       <c:forEach items="${peliculas}" var="pelicula" >
-      	<div class="text-center"><a href="usuario/funcion?idPelicula=${pelicula.idPelicula}"><img src="${pelicula.imagen}"></a></div>
+      	<div class="text-center"><a href="user/funcion?idPelicula=${pelicula.idPelicula}"><img src="${pelicula.imagen}"></a></div>
       	<div class="text-center"><h2>${pelicula.titulo}</h2></div>
       </c:forEach>
       
