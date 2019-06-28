@@ -1,6 +1,5 @@
 package com.uca.capas.controller;
 
-
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -27,73 +26,78 @@ import com.uca.capas.service.TicketService;
 
 @Controller
 public class PeliculaController {
-	
-	
-	@Autowired 
+
+	@Autowired
 	public PeliculaService peliService;
-	
-	@Autowired 
+
+	@Autowired
 	public FuncionService funcionService;
-	
-	@Autowired 
+
+	@Autowired
 	public TicketService ticketService;
-	
-	
-	
-	@RequestMapping(value="/funciones",method = RequestMethod.GET)
+
+	@RequestMapping(value = "/funciones", method = RequestMethod.GET)
 	public ModelAndView funcionesCurrents(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView();
-		Integer usr = (Integer)request.getSession().getAttribute("id");
+		Integer usr = (Integer) request.getSession().getAttribute("id");
 		List<Pelicula> peliculas;
 		List<Funcion> funciones;
-		if(usr != null ) {
-			
+		if (usr != null) {
+
 			peliculas = peliService.listAll();
-			funciones = funcionService.CurrentsFunctions();			
+			funciones = funcionService.CurrentsFunctions();
 			mv.addObject("peliculas", peliculas);
 			mv.addObject("funciones", funciones);
-			//agregar vista 
-		}else {
+			// agregar vista
+		} else {
 			request.getSession().setAttribute("redirect", "funciones");
 			return (new MainController()).main(request);
 		}
-		
+
 		return mv;
 	}
-	
-	
+
 	@RequestMapping(value = "/Funcion", method = RequestMethod.POST)
 	public ModelAndView funcion(@Valid @ModelAttribute("Funcion") Funcion funcion, HttpServletRequest request) {
 		Ticket tic = new Ticket();
+		Integer usr = (Integer) request.getSession().getAttribute("id");
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("ticket_to_make", tic);
-		//addvista
-		
+
+		if (usr != null) {
+
+			mv.addObject("ticket_to_make", tic);
+
+			// addvista
+
+			// agregar vista
+		} else {
+			request.getSession().setAttribute("redirect", "funciones");
+			return (new MainController()).main(request);
+		}
+
 		return mv;
-		
-		
+
 	}
-	
-	
+
 	@RequestMapping(value = "/ticket", method = RequestMethod.POST)
 	public String tickets(@Valid @ModelAttribute("Ticket") Ticket ticket, HttpServletRequest request) {
 		String resultado = "No se ha podido realizar el pago";
-		if(ticketService.insert(ticket)) {
-			resultado = "Succes";
+
+		Integer usr = (Integer) request.getSession().getAttribute("id");
+		if (usr != null) {
+
+			if (ticketService.insert(ticket)) {
+				resultado = "Succes";
+			}
+
+			// agregar vista
+		} else {
+			request.getSession().setAttribute("redirect", "funciones");
+			return "no se ha logueado";
 		}
-		
-		
-		return null;
-		
+
+		return resultado;
+
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 }
