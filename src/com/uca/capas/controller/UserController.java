@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.uca.capas.domain.Pelicula;
@@ -49,7 +50,6 @@ public class UserController {
 		HttpSession session = request.getSession();
 		ModelAndView mv = new ModelAndView();
 		Integer id = Integer.parseInt((String) session.getAttribute("id"));
-		System.out.println("'"+id+"'");
 		if(id == null || id.toString().isEmpty()) {
 			usuario = new Usuario();
 			mv.addObject("usuario", usuario);
@@ -61,6 +61,22 @@ public class UserController {
 		mv.addObject("peliculas", peliculas);
 		mv.setViewName("usuarioViews/dashboard");
 		return mv;
+	}
+	
+	@RequestMapping(value = "/funcion" ,  method = RequestMethod.GET)
+	public ModelAndView funcion(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		ModelAndView mv = new ModelAndView();
+		Integer id = Integer.parseInt((String) session.getAttribute("id"));
+		if(id == null || id.toString().isEmpty()) {
+			usuario = new Usuario();
+			mv.addObject("usuario", usuario);
+			mv.setViewName("main");
+			return mv;
+			
+		}
+		System.out.println(request.getAttribute("idPelicula")+"");
+		return null;
 	}
 	
 }
