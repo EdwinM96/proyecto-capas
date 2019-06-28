@@ -48,7 +48,6 @@ public class UserController {
 		HttpSession session = request.getSession();
 		ModelAndView mv = new ModelAndView();
 		Integer id = Integer.parseInt((String) session.getAttribute("id"));
-		System.out.println("'"+id+"'");
 		if(id == null || id.toString().isEmpty()) {
 			usuario = new Usuario();
 			mv.addObject("usuario", usuario);
@@ -60,6 +59,22 @@ public class UserController {
 		mv.addObject("peliculas", peliculas);
 		mv.setViewName("usuarioViews/dashboard");
 		return mv;
+	}
+	
+	@RequestMapping("/funcion")
+	public ModelAndView funcion(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		ModelAndView mv = new ModelAndView();
+		Integer id = Integer.parseInt((String) session.getAttribute("id"));
+		if(id == null || id.toString().isEmpty()) {
+			usuario = new Usuario();
+			mv.addObject("usuario", usuario);
+			mv.setViewName("main");
+			return mv;
+			
+		}
+		System.out.println(session.getAttribute("funcion"));
+		return null;
 	}
 	
 }

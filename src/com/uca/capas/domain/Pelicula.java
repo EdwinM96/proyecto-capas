@@ -26,7 +26,7 @@ public class Pelicula {
  	@GeneratedValue(generator="pelicula_id_pelicula_seq", strategy = GenerationType.AUTO)
 	@SequenceGenerator(name = "pelicula_id_pelicula_seq", sequenceName = "public.pelicula_id_pelicula_seq")
     @Column(name="id_pelicula")
-    private Integer idUsuario;
+    private Integer idPelicula;
 	
 	@Column(name="sinopsis")
 	private String sinopsis;
@@ -65,7 +65,7 @@ public class Pelicula {
 			Calendar fCreacion, String titulo, Administrador aModificacion, Calendar fModificacion,
 			Administrador aCreacion) {
 		super();
-		this.idUsuario = idUsuario;
+		this.idPelicula = idUsuario;
 		this.sinopsis = sinopsis;
 		this.imagen = imagen;
 		this.duracion = duracion;
@@ -81,12 +81,12 @@ public class Pelicula {
 		super();
 	}
 
-	public Integer getIdUsuario() {
-		return idUsuario;
+	public Integer getIdPelicula() {
+		return idPelicula;
 	}
 
-	public void setIdUsuario(Integer idUsuario) {
-		this.idUsuario = idUsuario;
+	public void setIdPelicula(Integer idUsuario) {
+		this.idPelicula = idUsuario;
 	}
 
 	public String getSinopsis() {
