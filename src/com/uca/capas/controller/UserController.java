@@ -74,8 +74,8 @@ public class UserController {
 			return mv;
 			
 		}
-		System.out.println(request.getParameter("idPelicula")+"");
-		return null;
+		mv.setViewName("usuarioViews/funcionesDisplay");
+		return mv;
 	}
 	
 }
