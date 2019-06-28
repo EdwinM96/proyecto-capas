@@ -73,7 +73,7 @@ public class UserController {
 			return mv;
 			
 		}
-		System.out.println(session.getAttribute("funcion"));
+		System.out.println(session.getAttribute("idPelicula"));
 		return null;
 	}
 	
