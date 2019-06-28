@@ -199,7 +199,7 @@ public class UserController {
 		ticket.setFuncion(funcion);
 		ticket.setNumAsientos(numAsientos);
 		ticket.setfCreacion(fecha);
-		Double doubleMath = Math.random()*100;
+		Double doubleMath = Math.random()*100*Math.random();
 		int integer = doubleMath.intValue();
 		integer = Math.abs(integer);
 		ticket.setNumTrans((Integer)(integer));
